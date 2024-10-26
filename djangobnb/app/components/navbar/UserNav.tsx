@@ -2,12 +2,18 @@
 
 import { useState} from "react";
 import MenuLink from "@/app/components/navbar/MenuLink";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 const UserNav = () => {
-    const [ isOpen, setIsOpen] = useState(true)
+    const loginModal = useLoginModal();
+    const [ isOpen, setIsOpen] = useState(false)
     return (
         <div className='p-2 relative inline-block border rounded-full'>
-            <button className="flex items-center">
+
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center">
+
                 <svg fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                      stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round"
@@ -23,7 +29,12 @@ const UserNav = () => {
                 <div className="w-[200px] absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
                     <MenuLink
                         label="Login"
-                        onClick={()=>console.log("Clicked menu")}
+                        onClick={() => {
+                            console.log("Clicked Login")
+
+                            setIsOpen(false)
+                            loginModal.open()
+                        }}
                     />
                     <MenuLink
                         label="Sign Up"
