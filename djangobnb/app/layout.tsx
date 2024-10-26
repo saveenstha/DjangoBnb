@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/app/components/navbar/Navbar";
 import Modal from "@/app/components/modals/Modal";
 import LoginModal from "@/app/components/modals/LoginModal";
+import SignupModal from "@/app/components/modals/SignupModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         </div>
 
         <LoginModal/>
+        <SignupModal/>
         {/*<Modal*/}
         {/*  label="Modal Test"*/}
         {/*  content={content}*/}
