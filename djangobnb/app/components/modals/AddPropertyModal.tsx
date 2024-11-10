@@ -252,7 +252,6 @@ const AddPropertyModal = () => {
                         )
                     })}
 
-
                     <CustomButton
                         label='Previous'
                         className="mb-2 bg-black hover:bg-gray-800"
