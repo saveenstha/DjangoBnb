@@ -1,6 +1,7 @@
 "use client";
 
 import { useState} from "react";
+import {useRouter} from "next/navigation";
 
 import MenuLink from "@/app/components/navbar/MenuLink";
 import LogoutButton from "@/app/components/LogoutButton";
@@ -17,6 +18,9 @@ const UserNav: React.FC<UserNavProps> = ({
 }) => {
     const loginModal = useLoginModal();
     const signupModal = useSignupModal();
+
+    const router = useRouter();
+
     const [ isOpen, setIsOpen] = useState(false)
     return (
         <div className='p-2 relative inline-block border rounded-full'>
@@ -39,7 +43,16 @@ const UserNav: React.FC<UserNavProps> = ({
             {isOpen && (
                 <div className="w-[200px] absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
                     {userId ? (
-                        < LogoutButton />
+                        <>
+                            <MenuLink
+                                label="My Properties"
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    router.push(`/myproperties`);
+                                }}
+                            />
+                            < LogoutButton />
+                        </>
                     ) : (
                         <>
                             <MenuLink

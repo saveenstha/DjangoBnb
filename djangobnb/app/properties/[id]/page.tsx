@@ -1,10 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
 import ReservationSidebar from "@/app/components/properties/ReservationSidebar";
 
 import apiService from "@/app/components/services/apiService";
+import {getUserId} from "@/app/lib/actions";
 
 const PropertyDetailPage = async ({params}:{ params: { id : string }}) =>{
     const property = await apiService.get(`/api/properties/${params.id}`)
+    const userId = await getUserId();
 
     return (
         <main className="max-w-[1500px] mx-auto px-6 pb-6">
@@ -26,10 +29,13 @@ const PropertyDetailPage = async ({params}:{ params: { id : string }}) =>{
                     </span>
 
                     <hr/>
-                    <div className="py-6 flex items-center space-x-4">
-                        {property.lanlord.avatar_url && (
+                    <Link
+                        href = {`/landlords/${property.landlord.id}`}
+                        className="py-6 flex items-center space-x-4"
+                    >
+                        {property.landlord.avatar_url && (
                             <Image
-                                src={property.lanlord.avatar_url}
+                                src={property.landlord.avatar_url}
                                 width={50}
                                 height={50}
                                 className="rounded-full"
@@ -37,8 +43,8 @@ const PropertyDetailPage = async ({params}:{ params: { id : string }}) =>{
                                 />
                         )}
 
-                        <p><strong>{property.lanlord.name}  </strong> is your host. </p>
-                    </div>
+                        <p><strong>{property.landlord.name}  </strong> is your host. </p>
+                    </Link>
                     <hr/>
                     <p className="mt-6 text-lg">
                         {property.description}
@@ -46,6 +52,7 @@ const PropertyDetailPage = async ({params}:{ params: { id : string }}) =>{
                 </div>
 
                 <ReservationSidebar
+                    userId={userId}
                     property={property}
                 />
             </div>
