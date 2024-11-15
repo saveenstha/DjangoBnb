@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const MyReservationsPage = async () => {
     const reservations = await apiService.get('/api/auth/myreservations/')
+    console.log("Reservations:", reservations);
 
     return (
         <main className="max-w-[1500px] mx-auto px-6 pb-6">

@@ -7,6 +7,7 @@ from .serializers import UserDetailSerializer
 
 from property.serializers import ReservationsListSerializer
 
+
 @api_view(['GET'])
 @authentication_classes([])
 @permission_classes([])
@@ -27,3 +28,4 @@ def reservations_list(request):
 
     serializer = ReservationsListSerializer(reservations, many=True)
     return JsonResponse(serializer.data, safe=False)
+
