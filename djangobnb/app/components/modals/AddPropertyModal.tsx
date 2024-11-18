@@ -6,9 +6,9 @@ import {ChangeEvent, useState} from "react";
 import Modal from "@/app/components/modals/Modal";
 import Categories from "@/app/components/addproperty/Categories";
 import CustomButton from "@/app/components/forms/CustomButton";
-import SelectCountry, {SelectCountryValue} from "@/app/components/forms/SelectCountry";
 
 import useAddPropertyModal from "@/app/hooks/useAddPropertyModal";
+import SelectCountry, {SelectCountryValue} from "@/app/components/forms/SelectCountry";
 
 import apiService from "@/app/components/services/apiService";
 import {useRouter} from "next/navigation";
@@ -16,6 +16,7 @@ import {useRouter} from "next/navigation";
 const AddPropertyModal = () => {
     //
     // states
+
     const [currentStep, setCurrentStep] = useState(1);
     const [errors, setErrors] = useState<string[]>([]);
     const [dataCategory, setDataCategory] = useState('');
@@ -51,11 +52,17 @@ const AddPropertyModal = () => {
 
     //
     // Submit
+
     const submitForm = async () => {
         console.log('submitForm');
 
         if (
-            dataCategory && dataTitle && dataDescription && dataPrice && dataCountry && dataImage
+            dataCategory &&
+            dataTitle &&
+            dataDescription &&
+            dataPrice &&
+            dataCountry &&
+            dataImage
         ) {
             const formData = new FormData();
             formData.append('category', dataCategory);
@@ -89,6 +96,9 @@ const AddPropertyModal = () => {
         }
     }
 
+    //
+    //
+
     const content = (
         <>
             {currentStep ==1 ? (
@@ -118,9 +128,7 @@ const AddPropertyModal = () => {
                                 onChange = {(e) => setDataTitle(e.target.value)}
                                 className="w-full p-4 border border-gray-600 rounded-xl"/>
                         </div>
-                    </div>
 
-                    <div className="pt-3 pb-6 space-y-4">
                         <div className="flex flex-col space-y-2">
                             <label>Description</label>
                             <textarea
@@ -154,7 +162,8 @@ const AddPropertyModal = () => {
                                 type={"number"}
                                 value={dataPrice}
                                 onChange = {(e) => setDataPrice(e.target.value)}
-                                className="w-full p-4 border border-gray-600 rounded-xl"/>
+                                className="w-full p-4 border border-gray-600 rounded-xl"
+                            />
                         </div>
 
                         <div className="flex flex-col space-y-2">
@@ -163,7 +172,8 @@ const AddPropertyModal = () => {
                                 type={"number"}
                                 value={dataBedrooms}
                                 onChange = {(e) => setDataBedrooms(e.target.value)}
-                                className="w-full p-4 border border-gray-600 rounded-xl"/>
+                                className="w-full p-4 border border-gray-600 rounded-xl"
+                            />
                         </div>
 
                         <div className="flex flex-col space-y-2">
@@ -172,7 +182,8 @@ const AddPropertyModal = () => {
                                 type={"number"}
                                 value={dataBathrooms}
                                 onChange = {(e) => setDataBathrooms(e.target.value)}
-                                className="w-full p-4 border border-gray-600 rounded-xl"/>
+                                className="w-full p-4 border border-gray-600 rounded-xl"
+                            />
                         </div>
 
                         <div className="flex flex-col space-y-2">
@@ -181,10 +192,10 @@ const AddPropertyModal = () => {
                                 type={"number"}
                                 value={dataGuests}
                                 onChange = {(e) => setDataGuests(e.target.value)}
-                                className="w-full p-4 border border-gray-600 rounded-xl"/>
+                                className="w-full p-4 border border-gray-600 rounded-xl"
+                            />
                         </div>
                     </div>
-
 
                     <CustomButton
                         label='Previous'
@@ -207,6 +218,7 @@ const AddPropertyModal = () => {
                             onChange={(value) => setDataCountry(value as SelectCountryValue)}
                         />
                     </div>
+
                     <CustomButton
                         label='Previous'
                         className="mb-2 bg-black hover:bg-gray-800"
