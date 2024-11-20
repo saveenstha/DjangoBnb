@@ -8,7 +8,7 @@ from .serializers import ConversationListSerializer
 
 @api_view(['GET'])
 def conversations_list(request):
-    print(request.u)
+    print('all conversations', request.user.conversations.all())
     serializer = ConversationListSerializer(request.user.conversations.all(), many=True)
 
     return JsonResponse(serializer.data, safe=False)
